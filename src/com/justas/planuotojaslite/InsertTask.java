@@ -1,7 +1,13 @@
+package com.justas.planuotojaslite;
+
 import com.github.lgooddatepicker.components.DatePicker;
+import com.justas.planuotojasbase.Database;
+import com.justas.planuotojasbase.Tasks;
 
 import javax.swing.*;
-import java.awt.event.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.time.LocalDate;
 
 public class InsertTask extends JDialog {
@@ -10,9 +16,9 @@ public class InsertTask extends JDialog {
     private JButton buttonCancel;
     private JTextField taskname;
     private DatePicker taskdate;
-    private Tasks task;
+    private final Tasks task;
 
-    public InsertTask(LocalDate args, Tasks task) {
+    private InsertTask(LocalDate args, Tasks task) {
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
@@ -24,17 +30,9 @@ public class InsertTask extends JDialog {
             taskname.setText(task.getName());
         }
 
-        buttonOK.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onOK();
-            }
-        });
+        buttonOK.addActionListener(e -> onOK());
 
-        buttonCancel.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onCancel();
-            }
-        });
+        buttonCancel.addActionListener(e -> onCancel());
 
         // call onCancel() when cross is clicked
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
@@ -45,18 +43,13 @@ public class InsertTask extends JDialog {
         });
 
         // call onCancel() on ESCAPE
-        contentPane.registerKeyboardAction(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onCancel();
-            }
-        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+        contentPane.registerKeyboardAction(e -> onCancel(), KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
 
     private void onOK() {
 
         if (taskdate.getDate() != null && taskname.getText() != null && !taskname.getText().equals("")) {
-            Database insert = new Database();
-            insert.createDB();
+            Database insert = Database.getInstance();
             if (task == null) {
                 insert.insertTask(taskname.getText(), taskdate.toString());
             } else {

@@ -1,12 +1,12 @@
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+package com.justas.planuotojasbase;
+
 import java.time.LocalDate;
 
 public class Tasks {
 
-    private int id;
-    private String task;
-    private LocalDate date;
+    private final int id;
+    private final String task;
+    private final LocalDate date;
 
     public Tasks(int id, String task, LocalDate date) {
         this.id = id;
@@ -30,6 +30,7 @@ public class Tasks {
     public LocalDate getDate() {
         return date;
     }
+
     public String getName() {
         return task;
     }
