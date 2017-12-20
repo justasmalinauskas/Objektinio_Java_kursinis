@@ -10,12 +10,19 @@ public class InsertTask extends JDialog {
     private JButton buttonCancel;
     private JTextField taskname;
     private DatePicker taskdate;
+    private Tasks task;
 
-    public InsertTask(LocalDate args) {
+    public InsertTask(LocalDate args, Tasks task) {
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
         taskdate.setDate(args);
+        setLocationRelativeTo(MainWindow.frame);
+        this.task = task;
+        if (this.task != null) {
+            taskdate.setDate(task.getDate());
+            taskname.setText(task.getName());
+        }
 
         buttonOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -46,10 +53,17 @@ public class InsertTask extends JDialog {
     }
 
     private void onOK() {
-        if (taskdate.getDate() != null && taskname.getText() != null) {
+
+        if (taskdate.getDate() != null && taskname.getText() != null && !taskname.getText().equals("")) {
             Database insert = new Database();
             insert.createDB();
-            insert.insertTask(taskname.getText(), taskdate.toString());
+            if (task == null) {
+                insert.insertTask(taskname.getText(), taskdate.toString());
+            } else {
+                insert.updateTask(task.getID(), taskname.getText(), taskdate.toString());
+            }
+
+
             dispose();
         } else {
             JOptionPane.showMessageDialog(null, "You must insert task name and/or date");
@@ -61,9 +75,15 @@ public class InsertTask extends JDialog {
         dispose();
     }
 
-    public static void main(LocalDate args) {
-        InsertTask dialog = new InsertTask(args);
-        dialog.pack();
+    public static void main(LocalDate args, Tasks task) {
+        InsertTask dialog = new InsertTask(args, task);
+        dialog.setSize(350, 200);
+        if (task == null) {
+            dialog.setTitle("Insert Task");
+        } else {
+            dialog.setTitle("Update Task");
+        }
+        dialog.setResizable(false);
         dialog.setVisible(true);
     }
 }

@@ -1,14 +1,14 @@
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Tasks {
 
     private int id;
     private String task;
-    private Date date;
+    private LocalDate date;
 
-    public Tasks(int id, String task, Date date) {
+    public Tasks(int id, String task, LocalDate date) {
         this.id = id;
         this.task = task;
         this.date = date;
@@ -19,11 +19,18 @@ public class Tasks {
     }
 
     public String getStringValues() {
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        return task + " " + df.format(date);
+        //DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        return task + " " + date.toString();
     }
 
     public Integer getID() {
         return id;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+    public String getName() {
+        return task;
     }
 }

@@ -15,6 +15,7 @@ public class DeleteTasks extends JDialog {
         getRootPane().setDefaultButton(buttonOK);
         setDeleteList(args);
         deleteTasks = args;
+        setLocationRelativeTo(MainWindow.frame);
 
         buttonOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
