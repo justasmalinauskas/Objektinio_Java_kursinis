@@ -107,7 +107,7 @@ public class MainWindow {
             tasksOf.setText("All tasks");
             allTasks.setEnabled(false);
         } else {
-            tasksOf.setText("com.justas.planuotojasbase.Tasks of: " + taskDate.getDate().toString());
+            tasksOf.setText("Tasks of: " + taskDate.getDate().toString());
             allTasks.setEnabled(true);
         }
     }
