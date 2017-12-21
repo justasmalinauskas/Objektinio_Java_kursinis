@@ -1,8 +1,7 @@
 package com.justas.planuotojaslite;
 
 import com.github.lgooddatepicker.components.DatePicker;
-import com.justas.planuotojasbase.Database;
-import com.justas.planuotojasbase.Tasks;
+import com.github.lgooddatepicker.components.DatePickerSettings;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,7 +13,7 @@ import java.util.ArrayList;
 public class MainWindow {
 
     public static JFrame frame;
-    private final ArrayList<Tasks> selectedTasks = new ArrayList<>();
+    private ArrayList<Tasks> selectedTasks = new ArrayList<>();
     private JPanel mainPanel;
     private JButton newTask;
     private DatePicker taskDate;
@@ -120,5 +119,17 @@ public class MainWindow {
         }
 
         tasksList.setModel(model);
+    }
+
+    private void createUIComponents() {
+
+        // TODO: place custom component creation code here
+        DatePickerSettings settings = new DatePickerSettings();
+        settings.setVisibleDateTextField(false);
+        settings.setGapBeforeButtonPixels(0);
+        taskDate = new DatePicker(settings);
+        JButton datePickerButton = taskDate.getComponentToggleCalendarButton();
+        datePickerButton.setText("");
+        datePickerButton.setIcon(new ImageIcon(getClass().getResource("/img/notepad.png")));
     }
 }

@@ -1,8 +1,6 @@
 package com.justas.planuotojaslite;
 
 import com.github.lgooddatepicker.components.DatePicker;
-import com.justas.planuotojasbase.Database;
-import com.justas.planuotojasbase.Tasks;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;

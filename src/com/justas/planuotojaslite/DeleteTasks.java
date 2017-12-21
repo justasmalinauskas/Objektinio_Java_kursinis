@@ -1,8 +1,5 @@
 package com.justas.planuotojaslite;
 
-import com.justas.planuotojasbase.Database;
-import com.justas.planuotojasbase.Tasks;
-
 import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;

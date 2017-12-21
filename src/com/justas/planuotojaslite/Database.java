@@ -1,4 +1,4 @@
-package com.justas.planuotojasbase;
+package com.justas.planuotojaslite;
 
 import java.sql.*;
 import java.text.DateFormat;
